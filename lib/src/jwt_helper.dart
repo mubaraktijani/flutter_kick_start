@@ -36,7 +36,7 @@ class Jwt {
 	}
 
 	static bool isExpired(String token) {
-		final DateTime expirationDate = getExpiryDate(token);
+		final DateTime? expirationDate = getExpiryDate(token);
 		if (expirationDate != null) {
 			return DateTime.now().isAfter(expirationDate);
 		} else {
@@ -44,7 +44,7 @@ class Jwt {
 		}
 	}
 
-	static DateTime getExpiryDate(String token) {
+	static DateTime? getExpiryDate(String token) {
 		final Map<String, dynamic> payload = parseJwt(token);
 		if (payload['exp'] != null) {
 			return DateTime.fromMillisecondsSinceEpoch(0)
