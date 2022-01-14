@@ -16,8 +16,13 @@ class PasswordFormField extends StatefulWidget {
 	final String? Function(String?)? validator;
 
 	PasswordFormField({
-		this.decoration, this.hint, this.validator, this.prefix,
-		this.onSaved, this.textController, this.iconSize: 13, this.label
+		this.decoration, 
+		this.hint: 'Password', 
+		this.validator, 
+		this.prefix,
+		this.onSaved, 
+		this.textController, 
+		this.iconSize: 13, this.label: 'Password'
 	});
 
 	@override

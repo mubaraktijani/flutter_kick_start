@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   
 	@override
 	Widget build(BuildContext context) => MaterialApp(
-		home: MyHomePage(),
+		home: const MyHomePage(),
 		title: 'Flutter Demo',
 		theme: ThemeData.light()
 	);
@@ -29,8 +29,14 @@ class MyHomePage extends StatelessWidget {
 			),
 			body: ListView(
 				children: [
-					MintImage('https://x-images4.bangbros.com/monstersofcock/shoots/mc17154/members/450x340.jpg'),
-					MintVideoPlayer()
+					MintVideoPlayer(),
+					MintImage('https://photo.tuchong.com/4870004/f/298584322.jpg'),
+					PasswordFormField(),
+					SelectFormField(
+						label: 'Gender',
+						options: const ['male', 'female'],
+						onChanged: (val) => print(val)
+					)
 				]
 			)
 		);
