@@ -3,6 +3,7 @@ library flutter_kick_start;
 export 'package:velocity_x/velocity_x.dart';
 export 'package:extended_image/extended_image.dart';
 export 'package:flutter_vector_icons/flutter_vector_icons.dart';
+export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:libphonenumber/libphonenumber.dart';
 
