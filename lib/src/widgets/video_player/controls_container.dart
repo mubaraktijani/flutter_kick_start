@@ -134,7 +134,7 @@ class _ControlsContainerState extends State<ControlsContainer> {
 											onTap: () => togglePlay(),
 											child: Icon(Icons.play_arrow)
 												.iconColor(Colors.white)
-												.iconSize(Sizes.ICON_SIZE_24)
+												.iconSize(Sizes.text28)
 										)
 									],
 								)

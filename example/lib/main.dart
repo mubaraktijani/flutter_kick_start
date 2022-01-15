@@ -10,11 +10,23 @@ class MyApp extends StatelessWidget {
 	const MyApp({Key? key}) : super(key: key);
   
 	@override
-	Widget build(BuildContext context) => MaterialApp(
-		home: const MyHomePage(),
-		title: 'Flutter Demo',
-		theme: ThemeData.light()
-	);
+	Widget build(BuildContext context) => ScreenUtilInit(
+		minTextAdapt: true,
+		splitScreenMode: true,
+		builder: () => MaterialApp(
+			home: const MyHomePage(),
+			title: 'Flutter Demo',
+			theme: ThemeData.light(),
+			builder: (context, widget) {
+				ScreenUtil.setContext(context);
+				return MediaQuery(
+					//Setting font does not change with system font size
+					data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+					child: widget!
+				);
+			}
+		)
+    );
 }
 
 class MyHomePage extends StatelessWidget {
