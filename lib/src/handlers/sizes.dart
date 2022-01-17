@@ -1,19 +1,19 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Sizes {
-  static const double SIZE_120 = 120.0;
-  static const double SIZE_60 = 60.0;
-  static const double SIZE_48 = 48.0;
-  static const double SIZE_36 = 36.0;
-  static const double SIZE_24 = 24.0;
-  static const double SIZE_20 = 20.0;
-  static const double SIZE_16 = 16.0;
-  static const double SIZE_12 = 12.0;
-  static const double SIZE_8 = 8.0;
-  static const double SIZE_6 = 6.0;
-  static const double SIZE_4 = 4.0;
-  static const double SIZE_2 = 2.0;
-  static const double SIZE_0 = 0.0;
+	static double size120 = 120.0.r;
+	static double size60 = 60.0.r;
+	static double size48 = 48.0.r;
+	static double size36 = 36.0.r;
+	static double size24 = 24.0.r;
+	static double size20 = 20.0.r;
+	static double size16 = 16.0.r;
+	static double size12 = 12.0.r;
+	static double size8 = 8.0.r;
+	static double size6 = 6.0.r;
+	static double size4 = 4.0.r;
+	static double size2 = 2.0.r;
+	static double size0 = 0.0.r;
 
 	//TextSizes
 	static double text50 = 50.0.sp;
@@ -149,7 +149,4 @@ class Sizes {
   static const double ELEVATION_4 = 4.0;
   static const double ELEVATION_2 = 2.0;
   static const double ELEVATION_0 = 0.0;
-
-  static const double WINE_CARD_HEIGHT = 280.0;
-  static const double WINE_CARD_WIDTH = 340.0;
 }

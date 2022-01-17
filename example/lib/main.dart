@@ -20,8 +20,7 @@ class MyApp extends StatelessWidget {
 			builder: (context, widget) {
 				ScreenUtil.setContext(context);
 				return MediaQuery(
-					//Setting font does not change with system font size
-					data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+					data: MediaQuery.of(context).copyWith(textScaleFactor: .8),
 					child: widget!
 				);
 			}
@@ -41,8 +40,11 @@ class MyHomePage extends StatelessWidget {
 			),
 			body: ListView(
 				children: [
-					MintVideoPlayer(),
-					MintImage('https://photo.tuchong.com/4870004/f/298584322.jpg'),
+					MintVideoPlayer(
+						'assets/sample1/video.mp4',
+						thumbnail: 'assets/sample1/thumb.jpg',
+					).h(context.screenHeight * .3),
+					MintImage('assets/sample1/thumb.jpg'),
 					PasswordFormField(),
 					SelectFormField(
 						label: 'Gender',

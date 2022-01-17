@@ -2,11 +2,12 @@ library flutter_kick_start;
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MintImage extends StatelessWidget {
 
 	final String path;
-	final BoxFit? fit;
+	final BoxFit fit;
 	final double? height;
 	final double? width;
 	final double? borderRadius;
@@ -14,7 +15,7 @@ class MintImage extends StatelessWidget {
 	final BoxBorder? border;
 
 	MintImage(this.path, {
-		this.fit, 
+		this.fit: BoxFit.contain, 
 		this.height, 
 		this.width, 
 		this.borderRadius,
@@ -23,7 +24,7 @@ class MintImage extends StatelessWidget {
 	});
 
 	static Widget circle(String path, {
-		BoxFit? fit, 
+		BoxFit fit: BoxFit.cover, 
 		double? height, 
 		double? width,
 		BoxBorder? border
@@ -38,21 +39,18 @@ class MintImage extends StatelessWidget {
 
 	@override
 	Widget build(BuildContext context) {
+		if(this.path.endsWith('.svg')) 
+			return svgImage();
 
-		final Uri? uri = Uri.tryParse(this.path);
-		bool isSVG = this.path.endsWith('.svg');
-		bool isNetworkImage = uri != null && uri.hasAbsolutePath;
-
-		if(isNetworkImage) return networkImage();
-
-		if(isSVG) return svgImage();
+		if(Uri.parse(this.path).hasAbsolutePath) 
+			return networkImage();
 
 		return assetImage();
 	}
 
 	Widget assetImage() => ExtendedImage.asset(
 		this.path,
-		fit: BoxFit.fill,
+		fit: this.fit,
 		width: this.width,
 		height: this.height,
 		border: this.border,
@@ -62,11 +60,26 @@ class MintImage extends StatelessWidget {
 			: BorderRadius.circular(this.borderRadius!)
 	);
 
-	Widget svgImage() => Image.asset('name');
+	Widget svgImage() {
+		if(Uri.parse(this.path).hasAbsolutePath) 
+			return SvgPicture.network(
+				this.path,
+				fit: this.fit,
+				width: this.width,
+				height: this.height
+			);
+		
+		return SvgPicture.asset(
+			this.path,
+			fit: this.fit,
+			width: this.width,
+			height: this.height
+		);
+	}
 
 	Widget networkImage() => ExtendedImage.network(
 		this.path,
-		fit: BoxFit.fill,
+		fit: this.fit,
 		cache: true,
 		width: this.width,
 		height: this.height,
