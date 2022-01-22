@@ -1,15 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_kick_start/flutter_kick_start.dart';
 import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:ui';
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+
+import 'volume_progress_bar.dart';
 
 part 'volumn_control.dart';
 part 'controls_container.dart';
 part 'bottom_control_bar.dart';
+part 'fullscreen_view.dart';
 
 class MintVideoPlayer extends StatefulWidget {
 
@@ -22,7 +25,7 @@ class MintVideoPlayer extends StatefulWidget {
 	MintVideoPlayer(this.video, {
 		this.thumbnail, 
 		this.height,
-		this.repeat: true,
+		this.repeat: false,
 		this.autoplay: true
 	});
 
@@ -35,6 +38,9 @@ class MintVideoPlayerState extends State<MintVideoPlayer> {
 	late VideoPlayerController _controller;
 	late VideoPlayerValue _videoPlayerValue;
 	bool isPlayed = false;
+	bool isFullscreen = false;
+	
+	late StreamSubscription<double> _subscription;
 
 	VideoPlayerController _getController() {
 		if (Uri.parse(widget.video).isAbsolute) {
@@ -53,11 +59,19 @@ class MintVideoPlayerState extends State<MintVideoPlayer> {
 	@override
 	void initState() {
 		super.initState();
+
 		_controller = this._getController();
 		_videoPlayerValue = _controller.value;
-		_controller.setVolume(1.0);
 		_controller.addListener(() {
-			setState(() => _videoPlayerValue = _controller.value);
+			if(!isFullscreen) {
+				VideoPlayerValue playerValue = _controller.value;
+
+				if(playerValue.duration == playerValue.position) {
+					_controller.seekTo(Duration());
+				}
+
+				setState(() => _videoPlayerValue = playerValue);
+			}
 		});
 
 		_controller.setLooping(widget.repeat);
@@ -65,6 +79,7 @@ class MintVideoPlayerState extends State<MintVideoPlayer> {
 
 	@override
 	void dispose() {
+		_subscription.cancel();
 		_controller.dispose();
 		super.dispose();
 	}
@@ -129,7 +144,10 @@ class MintVideoPlayerState extends State<MintVideoPlayer> {
 	Widget videoPlayerView() => Stack(
 		alignment: Alignment.bottomCenter,
 		children: [
-			VideoPlayer(_controller),
+			AspectRatio(
+				aspectRatio: _controller.value.aspectRatio,
+				child: VideoPlayer(_controller)
+			),
 			if(!isPlayed) Positioned.fill(child: this.playIcon()),
 			if(isPlayed) ControlsContainer(
 				controller: _controller,
@@ -151,10 +169,13 @@ class MintVideoPlayerState extends State<MintVideoPlayer> {
 			color: Colors.black.withOpacity(.1),
 			child: Card(
 				margin: EdgeInsets.zero,
-				shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+				shape: RoundedRectangleBorder(
+					borderRadius: BorderRadius.circular(30),
+					side: BorderSide(color: context.primaryColor)
+				),
 				color: context.primaryColor.withOpacity(.4),
-				child: Icon(Ionicons.play)
-					.iconSize(30)
+				child: Icon(Ionicons.ios_play_outline)
+					.iconSize(20)
 					.iconColor(Colors.white)
 					.p(12)
 			).centered(),

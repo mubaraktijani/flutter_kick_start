@@ -3,10 +3,12 @@ part of 'video_player.dart';
 class ControlsContainer extends StatefulWidget {
 	final VideoPlayerValue videoPlayerValue;
 	final VideoPlayerController controller;
+	final bool isFullscreen;
 
 	const ControlsContainer({
 		required this.controller,
-		required this.videoPlayerValue
+		required this.videoPlayerValue,
+		this.isFullscreen: false
 	});
   
 	@override
@@ -16,20 +18,12 @@ class ControlsContainer extends StatefulWidget {
 class _ControlsContainerState extends State<ControlsContainer> {
 
 	bool showControls = false;
-	bool isVideoStarted = false;
-	Duration transitionDuration = Duration(milliseconds: 500);
+	// bool isVideoStarted = false;
+	// Duration transitionDuration = Duration(milliseconds: 500);
 
-	late Duration videoPosition;
-	late Duration videoDuration;
-	late VideoPlayerValue videoPlayerValue;
-
-	@override
-	void initState() {
-		super.initState();
-		widget.controller.addListener(() {
-			setState(() => videoPlayerValue = widget.controller.value);
-		});
-	}
+	// late Duration videoPosition;
+	// late Duration videoDuration;
+	// late VideoPlayerValue videoPlayerValue;
 
 	toggleControlBars() {
 		setState(() => this.showControls = !this.showControls);
@@ -40,10 +34,10 @@ class _ControlsContainerState extends State<ControlsContainer> {
 	}
 
 	togglePlay() async {
-		if(!this.videoPlayerValue.isPlaying) {
+		if(widget.videoPlayerValue.isPlaying) {
 			await widget.controller.play();
 			setState((){
-				this.isVideoStarted = videoPlayerValue.position.inSeconds > 0;
+				// this.isVideoStarted = videoPlayerValue.position.inSeconds > 0;
 				this.showControls = !this.showControls;
 			});
 			return;
@@ -65,7 +59,8 @@ class _ControlsContainerState extends State<ControlsContainer> {
 					right: context.screenWidth * .05, 
 					child: BottomControlBar(
 						controller: widget.controller,
-						videoPlayerValue: widget.videoPlayerValue
+						videoPlayerValue: widget.videoPlayerValue,
+						isFullscreen: widget.isFullscreen
 					),
 					height: kToolbarHeight,
 					curve: Curves.bounceInOut,
