@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_kick_start/flutter_kick_start.dart';
-import 'package:perfect_volume_control/perfect_volume_control.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:ui';
 

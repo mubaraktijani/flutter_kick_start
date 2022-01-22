@@ -118,13 +118,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_animation_progress_bar:
-    dependency: transitive
-    description:
-      name: flutter_animation_progress_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   flutter_kick_start:
     dependency: "direct main"
     description:
@@ -310,13 +303,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
-  perfect_volume_control:
-    dependency: transitive
-    description:
-      name: perfect_volume_control
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
   petitparser:
     dependency: transitive
     description:

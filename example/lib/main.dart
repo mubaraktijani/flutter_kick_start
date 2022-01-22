@@ -49,7 +49,7 @@ class MyHomePage extends StatelessWidget {
 					SelectFormField(
 						label: 'Gender',
 						options: const ['male', 'female'],
-						onChanged: (val) => print(val)
+						onChanged: (val) => {}
 					)
 				]
 			)

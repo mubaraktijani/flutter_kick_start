@@ -111,13 +111,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_animation_progress_bar:
-    dependency: "direct main"
-    description:
-      name: flutter_animation_progress_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -289,13 +282,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.1"
-  perfect_volume_control:
-    dependency: "direct main"
-    description:
-      name: perfect_volume_control
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
   petitparser:
     dependency: transitive
     description:
