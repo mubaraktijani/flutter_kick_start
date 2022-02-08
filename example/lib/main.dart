@@ -41,8 +41,11 @@ class MyHomePage extends StatelessWidget {
 			body: ListView(
 				children: [
 					MintVideoPlayer(
-						'assets/sample1/video.mp4',
-						thumbnail: 'assets/sample1/thumb.jpg',
+						VideoPlayerController.asset(
+							'assets/sample1/video.mp4',
+							videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true)
+						),
+						// thumbnail: 'assets/sample1/thumb.jpg',
 					).h(context.screenHeight * .3),
 					MintImage('assets/sample1/thumb.jpg'),
 					PasswordFormField(),

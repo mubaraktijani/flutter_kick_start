@@ -1,14 +1,13 @@
 part of 'video_player.dart';
 
 class ControlsContainer extends StatefulWidget {
-	final VideoPlayerValue videoPlayerValue;
+	
+	final Widget bottomControl;
 	final VideoPlayerController controller;
-	final bool isFullscreen;
 
 	const ControlsContainer({
 		required this.controller,
-		required this.videoPlayerValue,
-		this.isFullscreen: false
+		required this.bottomControl
 	});
   
 	@override
@@ -18,58 +17,47 @@ class ControlsContainer extends StatefulWidget {
 class _ControlsContainerState extends State<ControlsContainer> {
 
 	bool showControls = false;
-	// bool isVideoStarted = false;
-	// Duration transitionDuration = Duration(milliseconds: 500);
-
-	// late Duration videoPosition;
-	// late Duration videoDuration;
-	// late VideoPlayerValue videoPlayerValue;
-
-	toggleControlBars() {
-		setState(() => this.showControls = !this.showControls);
-		Future.delayed(
-			Duration(seconds: 10),
-			() => setState(() => this.showControls = false)
-		);
-	}
-
-	togglePlay() async {
-		if(widget.videoPlayerValue.isPlaying) {
-			await widget.controller.play();
-			setState((){
-				// this.isVideoStarted = videoPlayerValue.position.inSeconds > 0;
-				this.showControls = !this.showControls;
-			});
-			return;
-		}
-
-		await widget.controller.pause();
-	}
 
 	@override
 	Widget build(BuildContext context) {
 		return Stack(
+			fit: StackFit.expand,
 			children: [
-				InkWell(
-					onTap: () => this.toggleControlBars(),
-					child: SizedBox.expand()
-				),
-				AnimatedPositioned(
-					left: context.screenWidth * .05,
-					right: context.screenWidth * .05, 
-					child: BottomControlBar(
-						controller: widget.controller,
-						videoPlayerValue: widget.videoPlayerValue,
-						isFullscreen: widget.isFullscreen
-					),
-					height: kToolbarHeight,
-					curve: Curves.bounceInOut,
-					bottom: showControls 
-						? 10
-						: -(kToolbarHeight),
-					duration: Duration(milliseconds: 500)
-				)
+				_overlay(),
+				_bottomFrameControl()
 			],
 		);
 	}
+
+	Widget _overlay() => GestureDetector(
+		onTap: () {
+			setState(() => this.showControls = !this.showControls);
+			Future.delayed(
+				Duration(seconds: 10),
+				() => setState(() => this.showControls = false)
+			);
+		},
+		child: Container(color: Colors.transparent)
+	);
+
+	Widget _bottomFrameControl() => AnimatedPositioned(
+		left: context.screenWidth * .05,
+		right: context.screenWidth * .05, 
+		child: _bottomControlFrame(),
+		curve: Curves.bounceInOut,
+		height: kToolbarHeight,
+		bottom: showControls ? 10 : -(kToolbarHeight),
+		duration: Duration(milliseconds: 500)
+	);
+
+	Widget _bottomControlFrame() => ClipRRect(
+		borderRadius: BorderRadius.circular(5),
+		child: BackdropFilter(
+			filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+			child: Container(
+				color: Colors.black.withOpacity(.3),
+				child: widget.bottomControl.pSymmetric(h: 16)
+			)
+		)
+	);
 }
