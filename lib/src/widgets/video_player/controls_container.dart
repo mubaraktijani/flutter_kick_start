@@ -31,11 +31,13 @@ class _ControlsContainerState extends State<ControlsContainer> {
 
 	Widget _overlay() => GestureDetector(
 		onTap: () {
-			setState(() => this.showControls = !this.showControls);
-			Future.delayed(
-				Duration(seconds: 10),
-				() => setState(() => this.showControls = false)
-			);
+			if(mounted) {
+				setState(() => this.showControls = !this.showControls);
+				Future.delayed(
+					Duration(seconds: 10),
+					() => setState(() => this.showControls = false)
+				);
+			}
 		},
 		child: Container(color: Colors.transparent)
 	);

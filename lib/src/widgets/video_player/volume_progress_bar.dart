@@ -41,8 +41,10 @@ class _VideoProgressIndicator2State extends State<VideoProgressIndicator2> {
 
 		return _VideoScrubber(
 			seekTo: (point) {
-				setState(() => currentPosition = point);
-				widget.seekTo(point);
+				if(mounted) {
+					setState(() => currentPosition = point);
+					widget.seekTo(point);
+				}
 			},
 			seekEnd: () {},
 			length: widget.length,

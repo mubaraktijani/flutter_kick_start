@@ -51,12 +51,6 @@ class MintVideoPlayerState extends State<MintVideoPlayer> {
 	}
 
 	@override
-	void dispose() {
-		widget.controller.dispose();
-		super.dispose();
-	}
-
-	@override
 	Widget build(BuildContext context) {
 		return AnimatedSwitcher(
 			duration: Duration(milliseconds: 300),
@@ -81,16 +75,22 @@ class MintVideoPlayerState extends State<MintVideoPlayer> {
 		controller: widget.controller,
 		bottomControl: BottomControlBar(
 			controller: widget.controller,
-			onFullscreen: (_isFullscreen) => setState(
-				() => isFullscreen = _isFullscreen
-			)
+			onFullscreen: (_isFullscreen) {
+				if(mounted) {
+					setState(
+						() => isFullscreen = _isFullscreen
+					);
+				}
+			}
 		)
 	);
 
 	Widget _playOverlay() => PlayOverlay(
 		onPlayed: (){
-			if(isInitialized && !isPlaying) widget.controller.play();
-			setState(() => isPlayed = true );
+			if(mounted) {
+				if(isInitialized && !isPlaying) widget.controller.play();
+				setState(() => isPlayed = true );
+			}
 		}
 	);
 }
