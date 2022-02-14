@@ -19,6 +19,9 @@ dependencies:
   libphonenumber: ^2.0.2
   flutter_screenutil: ^5.0.4
   flutter_svg: ^0.22.0
+  flutter_secure_storage: ^5.0.2
+  dio: ^4.0.4
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:
