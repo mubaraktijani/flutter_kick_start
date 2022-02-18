@@ -21,8 +21,33 @@ export 'src/handlers/sizes.dart';
 export 'src/handlers/functions.dart';
 export 'src/handlers/jwt_helper.dart';
 
+export 'src/lib/service.dart';
+
 GetIt get getIt => GetIt.instance;
 FlutterSecureStorage get localStorage => new FlutterSecureStorage();
 AndroidOptions get getAndroidOptions => AndroidOptions(
 	encryptedSharedPreferences: true,
 );
+
+
+class FlutterKickStart {
+	final String? baseUrl;
+	final int connectTimeout;
+	final int receiveTimeout;
+
+	FlutterKickStart({ 
+		this.baseUrl, 
+		this.connectTimeout: 20000,
+		this.receiveTimeout: 20000 
+	});
+
+	void init() {
+		if (!getIt.isRegistered(instance: FlutterKickStart)) {
+			getIt..registerSingleton<FlutterKickStart>(FlutterKickStart(
+				baseUrl: this.baseUrl,
+				connectTimeout: this.connectTimeout,
+				receiveTimeout: this.receiveTimeout
+			));
+		}
+	}
+}

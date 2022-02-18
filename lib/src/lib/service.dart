@@ -1,15 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_kick_start/flutter_kick_start.dart';
 
-abstract class Service {
-
-	String get baseUrl;
+abstract class AppService {
 	
 	Dio get http {
 		Dio dio = new Dio();
 
-		dio.options.baseUrl = baseUrl;
-		dio.options.connectTimeout = 20000;
-		dio.options.receiveTimeout = 20000;
+		FlutterKickStart config = getIt<FlutterKickStart>();
+
+		if (config.baseUrl != null) {
+			dio.options.baseUrl = config.baseUrl!;
+		}
+
+		dio.options.connectTimeout = config.connectTimeout;
+		dio.options.receiveTimeout = config.receiveTimeout;
+		
 
 		return dio;
 	}
