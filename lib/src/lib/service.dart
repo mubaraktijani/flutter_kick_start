@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_kick_start/flutter_kick_start.dart';
 
+import 'interceptor.dart';
+
 abstract class AppService {
 	
 	Dio get http {
@@ -14,6 +16,8 @@ abstract class AppService {
 
 		dio.options.connectTimeout = config.connectTimeout;
 		dio.options.receiveTimeout = config.receiveTimeout;
+
+		dio.interceptors.add(AppHttpInterceptor());
 		
 
 		return dio;
