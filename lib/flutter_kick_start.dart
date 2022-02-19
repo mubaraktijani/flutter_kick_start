@@ -1,6 +1,5 @@
 library flutter_kick_start;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
@@ -10,6 +9,7 @@ export 'package:flutter_vector_icons/flutter_vector_icons.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:libphonenumber/libphonenumber.dart';
+export 'package:dio/src/dio.dart';
 
 export 'src/widgets/image.dart';
 export 'src/widgets/route_page.dart';
