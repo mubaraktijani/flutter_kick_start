@@ -6,7 +6,7 @@ class AppHttpInterceptor extends Interceptor {
 
 	@override
 	Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-		print('REQUEST[${options.method}] => PATH: ${options.path}');
+		print('REQUEST[${options.method}] => PATH: ${options.path}?${options.data}');
 		return super.onRequest(options, handler);
 	}
 
