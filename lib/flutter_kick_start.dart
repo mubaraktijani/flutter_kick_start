@@ -9,7 +9,7 @@ export 'package:flutter_vector_icons/flutter_vector_icons.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:libphonenumber/libphonenumber.dart';
-export 'package:dio/src/dio.dart';
+export 'package:dio/dio.dart' hide MultipartFile;
 
 export 'src/widgets/image.dart';
 export 'src/widgets/route_page.dart';
