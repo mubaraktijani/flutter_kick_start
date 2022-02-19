@@ -28,7 +28,7 @@ class AppHttpInterceptor extends Interceptor {
 	
 	@override
 	void onError(DioError dioError, ErrorInterceptorHandler handler) {
-		print('ERROR[${dioError.response?.statusCode}] => PATH: ${dioError.requestOptions.path}');
+		print('ERROR[${dioError.response?.statusCode}] => PATH: ${dioError.error}');
 
 		switch (dioError.type) {
 			case DioErrorType.cancel:
